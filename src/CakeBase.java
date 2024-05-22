@@ -4,10 +4,9 @@ public class CakeBase {
     protected String name;
     protected String size;
     protected int quantity;
-    protected String[] availableSizes;
-    protected double[] pricePerSize;
+    protected String[] availableSizes = new String[100];
+    protected double[] pricePerSize =  new double[100];
 
-    // Constructor
     public CakeBase(String name, String size, int quantity, String[] availableSizes, double[] pricePerSize) {
         this.name = name;
         this.size = size;
@@ -15,36 +14,67 @@ public class CakeBase {
         this.availableSizes = availableSizes;
         this.pricePerSize = pricePerSize;
     }
+
+    public CakeBase() {
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    public String[] getAvailableSizes() {
+        return availableSizes;
+    }
+
+    public void setAvailableSizes(String[] availableSizes) {
+        this.availableSizes = availableSizes;
+    }
+
+    public double[] getPricePerSize() {
+        return pricePerSize;
+    }
+
+    public void setPricePerSize(double[] pricePerSize) {
+        this.pricePerSize = pricePerSize;
+    }
     public void chooseSize(String size) {
         this.size = size;
-        System.out.println("Mời bạn chọn size: " + size);
-        String size = new Scanner(System.in).nextLine();
+        System.out.println("Mời bạn chọn size : " + size);
     }
-    public void chooseQuantity(int quantity) {
-        System.out.println("Số lượng bạn cần mua: " + quantity);
-        int quantity = new Scanner(System.in).nextInt();
-    }
-
-    public void displayAvailableSizes() {
-        System.out.println("Available sizes for " + this.name + ":");
-        for (int i = 0; i < availableSizes.length; i++) {
-            System.out.println("- " + availableSizes[i] + ": $" + pricePerSize[i]);
-        }
-    }
-
-    // Phương thức để lấy giá cho kích thước cụ thể
-    public double getPriceForSize(String size) {
+    public double calculatePrice() {
+        double price = 0;
         for (int i = 0; i < availableSizes.length; i++) {
             if (availableSizes[i].equalsIgnoreCase(size)) {
-                return pricePerSize[i];
+                price = pricePerSize[i];
+                break;
             }
         }
-        return -1; // Giá trị không hợp lệ nếu size không tồn tại
+        return price * quantity;
     }
-
-    // Phương thức tính giá tổng
-    public double calculateTotalPrice() {
-        double pricePerUnit = getPriceForSize(this.size);
-        return pricePerUnit * this.quantity;
+    public void displaySizesAndPrices() {
+        System.out.println("Kích thước và giá bạn đã chọn:");
+        for (int i = 0; i < availableSizes.length; i++) {
+            System.out.println(availableSizes[i] + ": " + pricePerSize[i] + " VND");
+        }
     }
 }

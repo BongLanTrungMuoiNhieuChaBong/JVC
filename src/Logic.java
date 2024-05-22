@@ -1,15 +1,16 @@
 import java.util.Scanner;
 public class Logic {
     BLTM bltm = new BLTM();
-
     public void Bltm(){
         Scanner scanner = new Scanner(System.in);
-        System.out.println("Mời bạn chọn size (S/M/L): ");
+        String name = "Bông lan trứng muối";
+        System.out.print("Mời bạn chọn size (S/M/L): ");
         String size = scanner.nextLine();
-        System.out.println("Hãy chọn số lượng bạn muốn mua: ");
+        System.out.print("Hãy chọn số lượng bạn muốn mua: ");
         int quantity = scanner.nextInt();
-
-
+        double totalPrice = bltm.calculatePrice();
+        System.out.println("Giá của " + quantity + " " + name + " size " + size + " là: " + totalPrice + " VND");
+        scanner.close();
     }
     public void Cupcake(){
 
