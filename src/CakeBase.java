@@ -1,3 +1,5 @@
+import com.google.gson.Gson;
+
 import java.util.Scanner;
 
 public class CakeBase {
@@ -5,7 +7,7 @@ public class CakeBase {
     protected String size;
     protected int quantity;
     protected String[] availableSizes = new String[100];
-    protected double[] pricePerSize =  new double[100];
+    protected double[] pricePerSize = new double[100];
 
     public CakeBase(String name, String size, int quantity, String[] availableSizes, double[] pricePerSize) {
         this.name = name;
@@ -31,7 +33,13 @@ public class CakeBase {
     }
 
     public void setSize(String size) {
-        this.size = size;
+        for (String availableSize : availableSizes) {
+            if (availableSize != null && availableSize.equals(size)) {
+                this.size = size;
+                return;
+            }
+        }
+        throw new IllegalArgumentException("Kích thước không có sẵn");
     }
 
     public int getQuantity() {
@@ -39,6 +47,9 @@ public class CakeBase {
     }
 
     public void setQuantity(int quantity) {
+        if (quantity < 0) {
+            throw new IllegalArgumentException("Số lượng không hợp lệ");
+        }
         this.quantity = quantity;
     }
 
@@ -57,24 +68,23 @@ public class CakeBase {
     public void setPricePerSize(double[] pricePerSize) {
         this.pricePerSize = pricePerSize;
     }
-    public void chooseSize(String size) {
-        this.size = size;
-        System.out.println("Mời bạn chọn size : " + size);
-    }
-    public double calculatePrice() {
-        double price = 0;
+
+    public double getPriceForSize(String size) {
         for (int i = 0; i < availableSizes.length; i++) {
-            if (availableSizes[i].equalsIgnoreCase(size)) {
-                price = pricePerSize[i];
-                break;
+            if (availableSizes[i] != null && availableSizes[i].equals(size)) {
+                return pricePerSize[i];
             }
         }
-        return price * quantity;
+        throw new IllegalArgumentException("Size not available");
     }
-    public void displaySizesAndPrices() {
-        System.out.println("Kích thước và giá bạn đã chọn:");
-        for (int i = 0; i < availableSizes.length; i++) {
-            System.out.println(availableSizes[i] + ": " + pricePerSize[i] + " VND");
-        }
+
+    public String toJson() {
+        Gson gson = new Gson();
+        return gson.toJson(this);
+    }
+
+    public static CakeBase fromJson(String json) {
+        Gson gson = new Gson();
+        return gson.fromJson(json, CakeBase.class);
     }
 }

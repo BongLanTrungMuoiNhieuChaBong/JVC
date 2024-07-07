@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 public class Customer {
-    Menu menu = new Menu();
+    Logic logic = new Logic();
     public void firt (){
         System.out.println("Tên khách hàng:");
         String name = new Scanner(System.in).nextLine();
@@ -10,6 +10,7 @@ public class Customer {
         System.out.println(" Số điện thoại người nhận:");
         int numphone = new Scanner(System.in).nextInt();
         System.out.println("Đăng nhập thành công. Chào mừng bạn đến với MIA Cake.");
-        menu.order();
+        logic.order();
+
     }
 }
