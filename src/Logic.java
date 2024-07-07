@@ -2,10 +2,8 @@ import com.google.gson.Gson;
 
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.InputMismatchException;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
+
 public class Logic {
     Menu menu = new Menu();
 
@@ -13,40 +11,14 @@ public class Logic {
     Cheesecake cheesecake = new Cheesecake();
     Tiramisu tiramisu = new Tiramisu();
     Muffin muffin = new Muffin();
-//    List<Product> products = new ArrayList<>();
 
-    public void order() {
-        while (true) {
-            menu.menuCake();
-            int orderChoice = new Scanner(System.in).nextInt();
-            switch (orderChoice) {
-                case 1:
-                    Bltm();
-                    break;
-                case 2:
-                    Cupcake();
-                    break;
-                case 3:
-                    Muffin();
-                    break;
-                case 4:
-                    Tiramisu();
-                    break;
-                case 5:
-                    Cheesecake();
-                    break;
-                case 6:
-                    return;
-            }
-        }
-    }
+    public void Bltm11() {
 
-    public void Bltm() {
         BLTM bltm = new BLTM();
+        CakeBase cakeBase = new CakeBase();
         bltm.setName("Bông lan trứng muối");
         bltm.setAvailableSizes(new String[]{"Size S", "Size M", "Size L"});
         bltm.setPricePerSize(new double[]{400000, 450000, 500000});
-
     }
 
     public void Cupcake() {
